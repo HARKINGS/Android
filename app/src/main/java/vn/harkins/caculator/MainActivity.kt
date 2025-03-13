@@ -22,9 +22,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnConvert: Button
     private lateinit var btnEqual: Button
     private lateinit var btnBackSpace: Button
+    private lateinit var btnDot: Button
 
-    private var num1: Double = 0.0
-    private var num2: Double = 0.0
+    private var num1 = 0
+    private var num2 = 0
     private var ok: BooleanArray = BooleanArray(5) {false}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         btnClear = findViewById(R.id.btnC)
         btnClearEnd = findViewById(R.id.btnCE)
         btnBackSpace = findViewById(R.id.btnBS)
+        btnDot = findViewById(R.id.btnDot)
 
         btnNumbers = arrayOf(
             findViewById(R.id.btn0),
@@ -55,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.btn7),
             findViewById(R.id.btn8),
             findViewById(R.id.btn9),
-            findViewById(R.id.btnDot)
         )
 
         btnNumbers.forEach { button ->
@@ -71,12 +72,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        btnDot.setOnClickListener {
+            val currentText = textAns.text.toString()
+            if (!currentText.contains('.')) {
+                textAns.text = currentText + "."
+            }
+        }
+
         btnClear.setOnClickListener {
             textAns.text = "0"
             preAns.text = ""
             ok.indices.forEach { i -> ok[i] = false }
-            num1 = 0.0
-            num2 = 0.0
+            num1 = 0
+            num2 = 0
         }
 
         btnClearEnd.setOnClickListener {
@@ -94,7 +102,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnConvert.setOnClickListener {
-            textAns.setText("-" + textAns.text.toString())
+            var num = textAns.text.toString().toLong() * (-1)
+            textAns.setText(num.toString())
         }
 
         btnPlus.setOnClickListener {
@@ -126,7 +135,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun isValidNumber(input: String): Boolean {
         return try {
-            input.toDouble()
+            input.toLong()
             true
         } catch (e: NumberFormatException) {
             false
@@ -134,14 +143,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun typeActivation(type: Int, sign: String = "") {
-        num1 = textAns.text.toString().toDouble()
+        num1 = textAns.text.toString().toLong().toInt()
+        print(num1)
         preAns.setText(num1.toString() + sign)
-        textAns.text = ""
+        textAns.text = "0"
         ok[type] = true
     }
 
     private fun calculator() {
-        num2 = textAns.text.toString().toDouble()
+        num2 = textAns.text.toString().toLong().toInt()
         preAns.setText(preAns.text.toString() + num2.toString() + "=")
         var cnt: Int = 0
         ok.indices.forEach { i ->
@@ -150,8 +160,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if (cnt != 1) {
-            textAns.text = ""
+        if(cnt == 0) {
+            preAns.text = textAns.text.toString() + "="
+        } else if (cnt != 1) {
+            textAns.text = "0"
         }
 
         if (ok[1]) {
@@ -167,16 +179,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (ok[4]) {
-            if (num2 == 0.0) {
+            if (num2 == 0) {
                 textAns.text = "Error"
                 return
             }
-            textAns.text = (num1 / num2).toString()
+//            textAns.text = (num1.toDouble() / num2.toDouble()).toString()
+            textAns.text = (num1 / num2.toDouble()).toString()
         }
 
         ok.indices.forEach { i -> ok[i] = false }
 
-        num1 = 0.0
-        num2 = 0.0
+        num1 = 0
+        num2 = 0
     }
 }
