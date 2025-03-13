@@ -10,39 +10,47 @@
     <TextView
         android:id="@+id/preAns"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint=""
-        android:textSize="24sp"
+        android:layout_height="0dp"
         android:background="@android:color/darker_gray"
-        android:gravity="center"
+        android:padding="20dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textAns"
-        app:layout_constraintHeight_percent="0.05"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="173dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textAns"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@android:color/darker_gray"
-        android:hint="Nhập giá trị"
+        android:hint="0"
         android:padding="20dp"
         android:textAlignment="textEnd"
+        android:gravity="top"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="60sp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintHeight_percent="0.2"
-        app:layout_constraintTop_toTopOf="@id/preAns"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/preAns"
+        tools:ignore="MissingConstraints,RtlCompat" />
 
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.75"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textAns"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintHeight_percent="0.75">
+        tools:ignore="MissingConstraints">
 
         <TableRow
             android:layout_width="match_parent"
@@ -55,10 +63,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="CE"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btnC"
@@ -67,10 +75,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="C"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btnBS"
@@ -79,10 +87,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="BS"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btnDiv"
@@ -91,11 +99,11 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:shadowColor="#FFFFFF"
                 android:text="/"
                 android:textColor="@color/black"
                 android:textSize="34sp"
+                app:backgroundTint="@null"
                 app:rippleColor="#FFFFFF" />
 
         </TableRow>
@@ -113,10 +121,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="7"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn8"
@@ -125,10 +133,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="8"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn9"
@@ -137,10 +145,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="9"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btnMul"
@@ -149,11 +157,11 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="x"
-                android:textSize="34sp"
                 android:textColor="@color/black"
-                android:visibility="visible" />
+                android:textSize="34sp"
+                android:visibility="visible"
+                app:backgroundTint="@null" />
         </TableRow>
 
         <TableRow
@@ -168,10 +176,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="4"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn5"
@@ -180,10 +188,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="5"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn6"
@@ -192,10 +200,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="6"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btnSub"
@@ -204,10 +212,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="-"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
         </TableRow>
 
         <TableRow
@@ -222,10 +230,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="1"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn2"
@@ -234,10 +242,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="2"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn3"
@@ -246,10 +254,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="3"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btnPlus"
@@ -258,10 +266,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="+"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
         </TableRow>
 
         <TableRow
@@ -276,10 +284,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="+/-"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn0"
@@ -288,10 +296,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator_new"
-                app:backgroundTint="@null"
                 android:text="0"
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btnDot"
@@ -300,10 +308,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="."
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btnEqual"
@@ -312,10 +320,10 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_calculator"
-                app:backgroundTint="@null"
                 android:text="="
                 android:textColor="@color/black"
-                android:textSize="34sp" />
+                android:textSize="34sp"
+                app:backgroundTint="@null" />
         </TableRow>
 
     </TableLayout>

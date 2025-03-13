@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     private lateinit var textAns: TextView
+    private lateinit var preAns: TextView
     private lateinit var btnNumbers: Array<Button>
     private lateinit var btnClear: Button
     private lateinit var btnClearEnd: Button
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        preAns = findViewById(R.id.preAns)
         textAns = findViewById(R.id.textAns)
         btnConvert = findViewById(R.id.btnPDS)
         btnEqual = findViewById(R.id.btnEqual)
@@ -56,14 +58,25 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.btnDot)
         )
 
-        btnNumbers.forEach { button: Button ->
+        btnNumbers.forEach { button ->
             button.setOnClickListener {
-                textAns.setText(textAns.text.toString() + button.text)
+                val currentText = textAns.text.toString()
+                val newText = if (currentText == "0") {
+                                button.text.toString() // Nếu đang là "0", thay thế bằng số mới
+                            } else {
+                                currentText + button.text.toString() // Nếu không, nối tiếp chuỗi
+                            }
+
+                textAns.text = newText
             }
         }
 
         btnClear.setOnClickListener {
-            textAns.text = ""
+            textAns.text = "0"
+            preAns.text = ""
+            ok.indices.forEach { i -> ok[i] = false }
+            num1 = 0.0
+            num2 = 0.0
         }
 
         btnClearEnd.setOnClickListener {
@@ -85,19 +98,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnPlus.setOnClickListener {
-            typeActivation(1)
+            typeActivation(1, "+")
         }
 
         btnSub.setOnClickListener {
-            typeActivation(2)
+            typeActivation(2, "-")
         }
 
         btnMul.setOnClickListener {
-            typeActivation(3)
+            typeActivation(3, "*")
         }
 
         btnDiv.setOnClickListener {
-            typeActivation(4)
+            typeActivation(4, "/")
         }
 
         btnEqual.setOnClickListener {
@@ -111,25 +124,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun typeActivation(type: Int) {
+    private fun isValidNumber(input: String): Boolean {
+        return try {
+            input.toDouble()
+            true
+        } catch (e: NumberFormatException) {
+            false
+        }
+    }
+
+    private fun typeActivation(type: Int, sign: String = "") {
         num1 = textAns.text.toString().toDouble()
+        preAns.setText(num1.toString() + sign)
         textAns.text = ""
         ok[type] = true
     }
 
     private fun calculator() {
         num2 = textAns.text.toString().toDouble()
+        preAns.setText(preAns.text.toString() + num2.toString() + "=")
         var cnt: Int = 0
         ok.indices.forEach { i ->
             if (ok[i]) {
                 cnt++
-                ok[i] = false
             }
         }
-
-//        c2: Cách nay không thay đổi giá trị mảng gốc
-//        cnt = ok.count {it}
-//        ok = ok.map { false }.toBooleanArray()
 
         if (cnt != 1) {
             textAns.text = ""
@@ -154,5 +173,10 @@ class MainActivity : AppCompatActivity() {
             }
             textAns.text = (num1 / num2).toString()
         }
+
+        ok.indices.forEach { i -> ok[i] = false }
+
+        num1 = 0.0
+        num2 = 0.0
     }
 }
