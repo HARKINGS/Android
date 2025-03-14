@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity() {
                 return
             }
 //            textAns.text = (num1.toDouble() / num2.toDouble()).toString()
-            textAns.text = (num1 / num2.toDouble()).toString()
+            textAns.text = (num1 / num2).toString()
         }
 
         ok.indices.forEach { i -> ok[i] = false }
