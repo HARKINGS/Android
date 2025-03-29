@@ -70,10 +70,20 @@ class MainActivity : AppCompatActivity() {
         txtIPO[0].setOnClickListener {
             currentInputId = 0
             println("currentInputId: $currentInputId")
+            onClickNumbers(txtIPO[0])
+            onClickDot(txtIPO[0])
+            onClickBS(txtIPO[0])
+            onClickCE(txtIPO[0])
+            convertCurrency(0, 1)
         }
         txtIPO[1].setOnClickListener {
             currentInputId = 1
             println("currentInputId: $currentInputId")
+            onClickNumbers(txtIPO[1])
+            onClickDot(txtIPO[1])
+            onClickBS(txtIPO[1])
+            onClickCE(txtIPO[1])
+            convertCurrency(1, 0)
         }
     }
 
@@ -88,10 +98,10 @@ class MainActivity : AppCompatActivity() {
                     type[id] = p2
                     currentInputId = id
 
-                    onClickNumbers(txtIPO[currentInputId])
-                    onClickDot(txtIPO[currentInputId])
-                    onClickBS(txtIPO[currentInputId])
-                    onClickCE(txtIPO[currentInputId])
+//                    onClickNumbers(txtIPO[currentInputId])
+//                    onClickDot(txtIPO[currentInputId])
+//                    onClickBS(txtIPO[currentInputId])
+//                    onClickCE(txtIPO[currentInputId])
                     convertCurrency(currentInputId, 1 - currentInputId)
                 }
 
@@ -118,6 +128,7 @@ class MainActivity : AppCompatActivity() {
 
         val convertValue = (1.0 * value * (rate1 / rate2)).toString()
         println(convertValue)
+
         if(convertValue != "0.0") txtIPO[type2].setText(convertValue)
         else txtIPO[type2].setText("0")
     }
@@ -126,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         btnNumbers.forEach { button ->
             button.setOnClickListener {
                 val currentText = txtInput.text.toString()
-
+                println(currentText)
                 val newText = if (currentText == "0" || currentText =="0.0") {
                     button.text.toString() // Nếu đang là "0", thay thế bằng số mới
                 } else {
@@ -187,6 +198,7 @@ class MainActivity : AppCompatActivity() {
 
         setUp()
 
+        /// currencyItems phục vụ việc chuyển đổi ảnh
         currencyItems = arrayOf(
             ItemModel("VND", R.drawable.vnd),
             ItemModel("JPY", R.drawable.jpy),
@@ -195,6 +207,7 @@ class MainActivity : AppCompatActivity() {
             ItemModel("EUR", R.drawable.eur),
         )
 
+        /// items phục vụ cho chuển đổi đơn vị tiền tệ
         items = arrayOf(
             "Vietnam - VND",
             "Japan - Yen",
@@ -211,8 +224,6 @@ class MainActivity : AppCompatActivity() {
 
         setUpSpinner(R.id.spinnerInput, 0)
         setUpSpinner(R.id.spinnerOutput, 1)
-
-        // Gọi hàm cho phép nhập số, xóa số, xóa toàn bộ
 
         convertCurrency(0, 1) // Chuyển đổi ban đầu
 
