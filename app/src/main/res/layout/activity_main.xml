@@ -311,7 +311,7 @@
         android:id="@+id/txtUpdated"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="bottom|fill"
+        android:gravity="center"
         android:text="Updated"
         android:textSize="20sp"
         android:typeface="normal"

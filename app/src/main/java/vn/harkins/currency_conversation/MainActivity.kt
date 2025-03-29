@@ -108,6 +108,13 @@ class MainActivity : AppCompatActivity() {
                     img[id].setImageResource(currencyItems[p2].imageResource)
                     type[id] = p2
                     convertCurrency(currentInputId, 1 - currentInputId)
+
+                    val str: String = if(currencyValue[type[1]] == currencyValue[type[1]].toInt().toDouble()) {
+                        currencyValue[type[1]].toInt().toString()
+                    } else currencyValue[type[1]].toString()
+
+                    txtUpdated.text = "1 " +        currencyItems[type[0]].caption + " = " +
+                                      str + ' ' +   currencyItems[type[1]].caption
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
