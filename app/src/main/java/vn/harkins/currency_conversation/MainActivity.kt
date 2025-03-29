@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.img1)
         )
 
-        txtIPO[0].setOnClickListener {
+        if(currentInputId == 0 || txtIPO[0].hasOnClickListeners()) {
             currentInputId = 0
             println("currentInputId: $currentInputId")
             onClickNumbers(txtIPO[0])
@@ -76,6 +76,17 @@ class MainActivity : AppCompatActivity() {
             onClickCE(txtIPO[0])
             convertCurrency(0, 1)
         }
+
+//        txtIPO[0].setOnClickListener {
+//            currentInputId = 0
+//            println("currentInputId: $currentInputId")
+//            onClickNumbers(txtIPO[0])
+//            onClickDot(txtIPO[0])
+//            onClickBS(txtIPO[0])
+//            onClickCE(txtIPO[0])
+//            convertCurrency(0, 1)
+//        }
+
         txtIPO[1].setOnClickListener {
             currentInputId = 1
             println("currentInputId: $currentInputId")
@@ -96,7 +107,6 @@ class MainActivity : AppCompatActivity() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     img[id].setImageResource(currencyItems[p2].imageResource)
                     type[id] = p2
-                    currentInputId = id
 
 //                    onClickNumbers(txtIPO[currentInputId])
 //                    onClickDot(txtIPO[currentInputId])
