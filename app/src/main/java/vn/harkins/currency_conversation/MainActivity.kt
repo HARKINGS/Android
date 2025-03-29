@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var items: Array<String>
     lateinit var currencyItems: Array<ItemModel>
 
-    var currencyValue: Array<Double> = arrayOf(1.0, 169.6, 25570.5, 33116.85, 27588.0)
+    var currencyValue: Array<Double> = arrayOf(1.0, 0.0059, 0.000039, 0.000030, 0.000036)
     var type: Array<Int> = arrayOf(1, 1)
     var currentInputId = 0 // 0 = txtIPO[0], 1 = txtIPO[1]
 
@@ -77,15 +77,15 @@ class MainActivity : AppCompatActivity() {
             convertCurrency(0, 1)
         }
 
-//        txtIPO[0].setOnClickListener {
-//            currentInputId = 0
-//            println("currentInputId: $currentInputId")
-//            onClickNumbers(txtIPO[0])
-//            onClickDot(txtIPO[0])
-//            onClickBS(txtIPO[0])
-//            onClickCE(txtIPO[0])
-//            convertCurrency(0, 1)
-//        }
+        txtIPO[0].setOnClickListener{
+            currentInputId = 0
+            println("currentInputId: $currentInputId")
+            onClickNumbers(txtIPO[0])
+            onClickDot(txtIPO[0])
+            onClickBS(txtIPO[0])
+            onClickCE(txtIPO[0])
+            convertCurrency(0, 1)
+        }
 
         txtIPO[1].setOnClickListener {
             currentInputId = 1
@@ -107,11 +107,6 @@ class MainActivity : AppCompatActivity() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     img[id].setImageResource(currencyItems[p2].imageResource)
                     type[id] = p2
-
-//                    onClickNumbers(txtIPO[currentInputId])
-//                    onClickDot(txtIPO[currentInputId])
-//                    onClickBS(txtIPO[currentInputId])
-//                    onClickCE(txtIPO[currentInputId])
                     convertCurrency(currentInputId, 1 - currentInputId)
                 }
 
@@ -136,11 +131,16 @@ class MainActivity : AppCompatActivity() {
         val value = txtIPO[type1].text.toString().toDouble()
         println("gia tri $value")
 
-        val convertValue = (1.0 * value * (rate1 / rate2)).toString()
+        val convertValue = (1.0 * value * (rate2 / rate1))
         println(convertValue)
 
-        if(convertValue != "0.0") txtIPO[type2].setText(convertValue)
-        else txtIPO[type2].setText("0")
+        val result = if (convertValue == convertValue.toInt().toDouble()) {
+            convertValue.toInt().toString() // Nếu là số nguyên, chuyển thành Int rồi String
+        } else {
+            convertValue.toString() // Nếu là số thực, giữ nguyên
+        }
+
+        txtIPO[type2].setText(result)
     }
 
     fun onClickNumbers(txtInput: TextView) {
@@ -234,13 +234,5 @@ class MainActivity : AppCompatActivity() {
 
         setUpSpinner(R.id.spinnerInput, 0)
         setUpSpinner(R.id.spinnerOutput, 1)
-
-        convertCurrency(0, 1) // Chuyển đổi ban đầu
-
-//        val adapterArray = ArrayAdapter(
-//            this,
-//            android.R.layout.simple_dropdown_item_1line,
-//            currencyItems
-//        )
     }
 }
