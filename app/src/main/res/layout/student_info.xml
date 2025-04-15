@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/hotenTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/default_text_view"
+        android:ems="10"
+        android:hint="Họ tên"
+        android:inputType="text"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toStartOf="@+id/delbtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mssvTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="5dp"
+        android:hint="MSSV"
+        android:background="@drawable/default_text_view"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="@+id/hotenTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hotenTv" />
+
+    <ImageView
+        android:id="@+id/delbtn"
+        android:layout_width="90dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mssvTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_restore_from_trash_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
