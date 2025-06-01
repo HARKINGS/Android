@@ -24,7 +24,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var hoten: TextView
     private lateinit var mssv: TextView
     private lateinit var addbtn: Button
+    private lateinit var querybtn: Button
     private lateinit var db: SQLiteDatabase
+    private val itemList = arrayListOf<ItemModel>()
+    private lateinit var adapter: StudentListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         hoten = findViewById(R.id.hoten)
         mssv = findViewById(R.id.mssv)
         addbtn = findViewById(R.id.addbtn)
+        querybtn = findViewById(R.id.querybtn)
 
         db = openOrCreateDatabase("student.db", MODE_PRIVATE, null)
 
@@ -50,11 +54,11 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        val itemList = arrayListOf<ItemModel>()
-
-        val adapter = StudentListAdapter(this, itemList, db)
+        adapter = StudentListAdapter(this, itemList, db)
         val listView = findViewById<ListView>(R.id.listView)
         listView.adapter = adapter
+
+        loadStudentFromDb()
 
         addbtn.setOnClickListener {
             val strHoten: String = hoten.text.toString()
@@ -79,6 +83,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Thêm vào database
                 db.execSQL("INSERT INTO student (hoten, mssv) VALUES (?, ?)", arrayOf(strHoten, strMssv))
+//                db.execSQL("SELECT * FROM student")
 
                 // Cập nhật ListView
                 adapter.notifyDataSetChanged()
@@ -89,6 +94,24 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+
+        querybtn.setOnClickListener {
+            loadStudentFromDb()
+        }
+    }
+
+    fun loadStudentFromDb() {
+        itemList.clear()
+        val cursor = db.rawQuery("SELECT * FROM student", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val hotenFromDb = cursor.getString(cursor.getColumnIndexOrThrow("hoten"))
+                val mssvFromDb = cursor.getString(cursor.getColumnIndexOrThrow("mssv"))
+                itemList.add(ItemModel(hotenFromDb, mssvFromDb))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        adapter.notifyDataSetChanged()
     }
 
     override fun onPause() {
