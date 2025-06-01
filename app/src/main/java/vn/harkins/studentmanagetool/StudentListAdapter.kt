@@ -1,5 +1,9 @@
 package vn.harkins.studentmanagetool
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteDatabase.openOrCreateDatabase
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +12,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
-class StudentListAdapter(val items: ArrayList<ItemModel>): BaseAdapter() {
+class StudentListAdapter(
+    private val context: Context,
+    private val items: ArrayList<ItemModel>,
+    private val db: SQLiteDatabase): BaseAdapter() {
+
     override fun getCount(): Int = items.size
 
     override fun getItem(position: Int): Any = items[position]
@@ -34,9 +42,11 @@ class StudentListAdapter(val items: ArrayList<ItemModel>): BaseAdapter() {
             viewHolder = itemView.tag as MyViewHolder
         }
 
-        viewHolder.hoten.text = items[position].hoten
-        viewHolder.mssv.text = items[position].mssv
+        viewHolder.hoten.text = "Họ tên: ${items[position].hoten}"
+        viewHolder.mssv.text = "MSSV: ${items[position].mssv}"
+
         viewHolder.delbtn.setOnClickListener {
+            db.execSQL("DELETE FROM student WHERE mssv = ?", arrayOf(items[position].mssv))
             items.removeAt(position)
             notifyDataSetChanged()
         }
